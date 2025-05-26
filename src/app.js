@@ -41,7 +41,7 @@ app.use("/", userRouter);
 connectDb()
   .then(() => {
     console.log("database Connceted");
-    app.listen(3000, () => () => {
+    app.listen(3000, "0.0.0.0", () => () => {
       console.log("🚀 Server started and listening on http://localhost:3000");
     });
   })
