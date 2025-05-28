@@ -7,6 +7,7 @@ const { profileRouter } = require("./routes/profile");
 const { requestRouter } = require("./routes/request");
 const { userRouter } = require("./routes/user");
 const cors = require("cors");
+const paymentRouter = require("./routes/payment");
 
 require("./utils/cronjob");
 
@@ -24,6 +25,7 @@ app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
+app.use("/", paymentRouter);
 
 // app.post("/signup", async (req, res) => {
 //   const user = new User({
