@@ -8,6 +8,9 @@ const { requestRouter } = require("./routes/request");
 const { userRouter } = require("./routes/user");
 const cors = require("cors");
 const paymentRouter = require("./routes/payment");
+const http = require("http");
+const initializeSocket = require("./utils/socket");
+const { chatRouter } = require("./routes/chat");
 
 require("./utils/cronjob");
 
@@ -26,6 +29,7 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 app.use("/", paymentRouter);
+app.use("/",chatRouter);
 
 // app.post("/signup", async (req, res) => {
 //   const user = new User({
@@ -43,10 +47,13 @@ app.use("/", paymentRouter);
 //   }
 // });
 
+const server = http.createServer(app);
+initializeSocket(server);
+
 connectDb()
   .then(() => {
     console.log("database Connceted");
-    app.listen(process.env.PORT, "0.0.0.0", () => () => {
+    server.listen(process.env.PORT, "0.0.0.0", () => () => {
       console.log("🚀 Server started and listening on http://localhost:3000");
     });
   })

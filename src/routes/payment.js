@@ -1,4 +1,5 @@
 const express = require("express");
+const { userAuth } = require("../middlewares/auth");
 const paymentRouter = express.Router();
 
 paymentRouter.post("createOrder", userAuth, async (req, res) => {
